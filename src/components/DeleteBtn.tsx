@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -8,15 +8,21 @@ import {
 import { useToast } from "./ui/use-toast";
 import { ToastAction } from "./ui/toast";
 import axios from "axios";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-export default function DeleteBtn({ id ,refetch}: { id: string | number ,refetch:()=>void}) {
+export default function DeleteBtn({
+  id,
+  refetch,
+}: {
+  id: string | number;
+  refetch: () => void;
+}) {
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
   async function deleteContact() {
+    setLoading(true);
     try {
-
-        console.log(await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`));
-        
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}`, {
         params: {
           id,
@@ -26,9 +32,10 @@ export default function DeleteBtn({ id ,refetch}: { id: string | number ,refetch
     } catch (error) {
       toast({
         title: "Cannot delete request!",
-         action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
     }
+    setLoading(false);
   }
 
   return (
@@ -44,7 +51,14 @@ export default function DeleteBtn({ id ,refetch}: { id: string | number ,refetch
               Are you sure you want to delete this request?
             </p>
           </div>
-          <Button onClick={deleteContact}>Yes</Button>
+          <Button onClick={deleteContact} disabled={loading}>
+            {loading ? (
+              <AiOutlineLoading3Quarters className="animate-spin" />
+            ) : (
+              `Yes`
+            )}
+             
+          </Button>
         </div>
       </PopoverContent>
     </Popover>

@@ -22,11 +22,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 async function getData(): Promise<any[]> {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_IMAGE_API_URL}/images?q=my_website_images`
+      `${process.env.NEXT_PUBLIC_IMAGE_API_URL}/images?q=my_website_images&pageSize=100`
     );
 
     return res.data;
@@ -39,8 +40,11 @@ export default function Images() {
   const { data, isLoading, refetch } = useQuery("images", getData);
   const { toast } = useToast();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const sendFile = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
+
     try {
       e.preventDefault();
       console.log(e);
@@ -57,6 +61,7 @@ export default function Images() {
       });
       console.log(error);
     }
+    setLoading(false);
   };
   if (isLoading) {
     return (
@@ -65,6 +70,9 @@ export default function Images() {
       </div>
     );
   }
+
+  console.log(data);
+
   return (
     <section>
       {" "}
@@ -114,7 +122,13 @@ export default function Images() {
                 </div>
               </div>
               <DialogFooter>
-                <Button type="submit">Save changes</Button>
+                <Button type="submit" disabled={loading}>
+                  {" "}
+                  {loading && (
+                    <AiOutlineLoading3Quarters className="animate-spin" />
+                  )}
+                  Save
+                </Button>
               </DialogFooter>
             </form>
           </DialogContent>
