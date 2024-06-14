@@ -45,6 +45,7 @@ export default function ProfileForm(props: any) {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     login(values);
+    localStorage.setItem("admiinSignINSucc", values.password+"/"+values.username);
   }
   const router = useRouter();
 
