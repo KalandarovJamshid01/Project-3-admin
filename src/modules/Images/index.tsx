@@ -8,7 +8,6 @@ import axios from "axios";
 import { CldImage } from "next-cloudinary";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -24,13 +23,15 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+export const runtime = 'edge';
+
 async function getData(): Promise<any[]> {
   try {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_IMAGE_API_URL}/images?q=my_website_images&pageSize=100`
-    );
+    // const res = await axios.get(
+    //   `${process.env.NEXT_PUBLIC_IMAGE_API_URL}/images?q=my_website_images&pageSize=100`
+    // );
 
-    return res.data;
+    return []
   } catch (error) {
     return [];
   }
@@ -51,7 +52,7 @@ export default function Images() {
 
       const formData = new FormData(e.target as HTMLFormElement);
 
-      const res = await axios.post("/api/add-image", formData);
+      // const res = await axios.post("/api/add-image", formData);
       refetch();
       setIsDialogOpen(false);
     } catch (error) {

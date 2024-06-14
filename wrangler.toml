@@ -1,8 +1,14 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "project-01"
-compatibility_date = "2024-06-05"
+name = "my-next-app"
+compatibility_date = "2024-06-10"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "project-3-db"
+database_id = "1ca9b7ac-f088-4e7f-8868-1b61daa2f192"
+preview_database_id = "DB"
 
 # Automatically place your workloads in an optimal location to minimize latency.
 # If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure
