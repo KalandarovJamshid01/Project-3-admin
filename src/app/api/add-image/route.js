@@ -17,7 +17,7 @@ cloudinary.config({
 //     bodyParser: false,
 //   },
 // };
-// export const runtime = 'edge';
+export const runtime = 'edge';
 
 
 export async function POST(req) {

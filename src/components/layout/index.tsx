@@ -12,7 +12,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   const Admin_Logged_IN_Tester =
-    localStorage.getItem("admiinSignINSucc") || "server-error";
+    window.localStorage.getItem("admiinSignINSucc") || "server-error";
   console.log(Admin_Logged_IN_Tester);
 
   useEffect(() => {

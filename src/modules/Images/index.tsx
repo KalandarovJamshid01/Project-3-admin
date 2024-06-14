@@ -51,9 +51,9 @@ export default function Images() {
 
       const formData = new FormData(e.target as HTMLFormElement);
 
-      // const res = await axios.post("/api/add-image", formData);
-      refetch();
-      setIsDialogOpen(false);
+      const res = await axios.post("/api/add-image", formData);
+      // refetch();
+      // setIsDialogOpen(false);
     } catch (error) {
       toast({
         title: "Cannot upload image!",
