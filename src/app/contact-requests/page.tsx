@@ -13,9 +13,8 @@ async function getData(): Promise<ContactType[]> {
     return [];
   }
   try {
-    const res = await axios.get(process.env.NEXT_PUBLIC_API_URL);
-
-    return res.data.results;
+    const res = await fetch("/api/contacts")
+    return res.json();
   } catch (error) {
     return [];
   }

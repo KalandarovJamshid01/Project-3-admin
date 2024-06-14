@@ -27,11 +27,8 @@ export const runtime = 'edge';
 
 async function getData(): Promise<any[]> {
   try {
-    // const res = await axios.get(
-    //   `${process.env.NEXT_PUBLIC_IMAGE_API_URL}/images?q=my_website_images&pageSize=100`
-    // );
-
-    return []
+    const response = await fetch("/api/images")
+    return response.json();
   } catch (error) {
     return [];
   }

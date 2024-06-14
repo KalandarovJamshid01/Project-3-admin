@@ -23,11 +23,12 @@ export default function DeleteBtn({
   async function deleteContact() {
     setLoading(true);
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}`, {
-        params: {
-          id,
+      await fetch(`/api/del-contact?id=${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
         },
-      });
+    });
       refetch();
     } catch (error) {
       toast({

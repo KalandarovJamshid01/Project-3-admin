@@ -14,7 +14,12 @@ const {toast} = useToast()
     setLoading(true)
 
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_IMAGE_API_URL}/images/${image.id}`)
+      await fetch(`/api/del-image?id=${image.id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
       refetch()
     } catch (error) {
       console.log({error});
