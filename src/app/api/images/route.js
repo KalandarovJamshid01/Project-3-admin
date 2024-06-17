@@ -19,7 +19,7 @@ export async function GET(request) {
             results = await DB.prepare(query).bind(id).first();
         } else {
             const offset = (page - 1) * pageSize;
-            query = `SELECT * FROM images LIMIT ? OFFSET ?`;
+            query = `SELECT * FROM images ORDER BY created_at DESC LIMIT ? OFFSET ?`;
             results = await DB.prepare(query).bind(pageSize, offset).all();
         }
         return NextResponse.json(results.results);

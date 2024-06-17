@@ -8,6 +8,9 @@ export async function DELETE(request) {
       const id = url.searchParams.get('id');
       const { env } = getRequestContext();
       const DB = env.DB;
+      const getQuery=`SELECT * FROM images where id = ? `
+     const image= await DB.prepare(query).bind(id).first();
+
       const query = `DELETE FROM images WHERE id = ?`;
       await DB.prepare(query).bind(id).run();
   

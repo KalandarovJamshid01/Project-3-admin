@@ -51,17 +51,20 @@ export default function Images() {
 
       const formData = new FormData(e.target as HTMLFormElement);
 
-      const res = await axios.post("/api/add-image", formData);
+      const res = await fetch("/api/add-image", {
+        method: "POST",
+        body: formData,
+      });
       // refetch();
       // setIsDialogOpen(false);
     } catch (error) {
       toast({
         title: "Cannot upload image!",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+        // action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
       console.log(error);
     }
-    setLoading(false);
+    // setLoading(false);
   };
   if (isLoading) {
     return (
@@ -71,7 +74,6 @@ export default function Images() {
     );
   }
 
-  console.log(data);
 
   return (
     <section>
